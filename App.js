@@ -1,29 +1,20 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { createAppContainer } from "react-navigation";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import React from 'react';
+import { createAppContainer, createSwitchNavigator,} from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { AppTabNavigator } from './components/AppTabNavigator'
+import WelcomeScreen from './screens/WelcomeScreen';
+import {AppDrawerNavigator} from './components/AppDrawerNavigator'
 
-import instagram from "./screens/in";
-import fb from "./screens/fb";
 
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
+export default function App() {
+  return (
+    <AppContainer/>
+  );
 }
 
-const TabNavigator = createBottomTabNavigator({
-  Instagram: { screen: instagram },
-  Facebook: { screen: fb }
-});
+const switchNavigator = createSwitchNavigator({
+  WelcomeScreen:{screen: WelcomeScreen},
+  Drawer:{screen: AppDrawerNavigator}
+})
 
-const AppContainer = createAppContainer(TabNavigator);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+const AppContainer = createAppContainer(switchNavigator);
